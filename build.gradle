@@ -1,0 +1,46 @@
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+def javaVersion = project.java_version as int
+
+java {
+    sourceCompatibility = JavaVersion.toVersion(javaVersion)
+    targetCompatibility = JavaVersion.toVersion(javaVersion)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = javaVersion
+    options.encoding = 'UTF-8'
+}
+
+base {
+    archivesName = 'mlapi'
+}
+
+jar {
+    archiveVersion = ''
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = project.artifactId
+        }
+    }
+
+    repositories {
+        maven {
+            name = 'rj'
+            url = 'https://maven.cloudsmith.io/Nexus/mlapi/'
+
+            credentials {
+                username = findProperty('cloudsmithUser')
+                password = findProperty('cloudsmithApiKey')
+            }
+        }
+    }
+}

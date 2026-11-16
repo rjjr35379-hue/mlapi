@@ -1,0 +1,26 @@
+
+# Gradle
+.gradle/
+build/
+
+# Compiled files
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+
+# Logs
+*.log
+
+# secrets
+.env
+secrets.properties
+
+# IDE
+.idea/
+*.iml
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
